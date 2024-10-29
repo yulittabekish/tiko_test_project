@@ -2,10 +2,12 @@ import datetime
 
 import pytest
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework import status
 
 from tests.integration.utils.auth_utils import get_auth_headers
+
 from tokens_auth.services import TokenService, TokenType
 
 pytest_plugins = ["tests.integration.utils.fixtures"]
@@ -17,6 +19,13 @@ def test_register(api_client):
     response = api_client.post(reverse("register"), data=data)
     assert response.status_code == status.HTTP_201_CREATED
 
+@pytest.mark.django_db
+def test_register_invalid_password(api_client):
+    data = {"email": "test@gmail.com", "username": "username", "password": "test"}
+    response = api_client.post(reverse("register"), data=data)
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    User = get_user_model()
+    assert User.objects.count() == 0
 
 @pytest.mark.django_db
 def test_register_bad_request(api_client):

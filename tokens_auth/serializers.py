@@ -12,12 +12,12 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         User = get_user_model()
+        if password := attrs.get("password"):
+            validate_password(password)
         if User.objects.filter(email=attrs["email"]).exists():
             raise serializers.ValidationError({"email": "Email already exists"})
 
-        user = User.objects.create_user(**attrs)
-        if password := attrs.get("password"):
-            validate_password(password, user)
+        User.objects.create_user(**attrs)
         return attrs
 
 
@@ -27,9 +27,9 @@ class LoginSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         User = get_user_model()
-        user = User.objects.get(username=attrs.get("username"))
         if password := attrs.get("password"):
-            validate_password(password, user)
+            validate_password(password)
+        User.objects.get(username=attrs.get("username"))
         return attrs
 
 
