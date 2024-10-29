@@ -1,4 +1,6 @@
 #### Run app with docker compose 
+Fistly you need to create .env file in the projects root with same environment variables as provided in the .env.example file.
+Secondly you can run an app using:
 ```shell
 docker compose up --build
 ```
