@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "tikoproject"
+version = "0.1.0"
+description = ""
+authors = ["Yulitta <yulitta.bekish@innowise.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.2"
+djangorestframework = "^3.15.2"
+drf-spectacular = "^0.27.2"
+pyjwt = "^2.9.0"
+python-dotenv = "^1.0.1"
+django-filter = "^24.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+ruff = "^0.7.1"
+isort = "^5.13.2"
+pytest-django = "^4.9.0"
+pytz = "^2024.2"
+pytest-cov = "^5.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

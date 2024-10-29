@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tiko-test-project
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
