@@ -1,8 +1,8 @@
+from django.contrib.auth.models import User
+from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 
-from django.utils import timezone
 from events.models import Event
-from django.contrib.auth.models import User
 
 
 def handle_event_registration(event: Event, user: User, register: bool) -> str:

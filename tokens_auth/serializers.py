@@ -27,7 +27,7 @@ class LoginSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         User = get_user_model()
-        user = User.objects.get(username=attrs["username"])
+        user = User.objects.get(username=attrs.get("username"))
         if password := attrs.get("password"):
             validate_password(password, user)
         return attrs

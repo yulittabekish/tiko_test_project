@@ -9,6 +9,7 @@ class ReadEventSerializer(serializers.ModelSerializer):
         model = Event
         fields = "__all__"
 
+
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event

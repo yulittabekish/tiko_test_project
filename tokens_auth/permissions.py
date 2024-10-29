@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from rest_framework import permissions
+from rest_framework.exceptions import AuthenticationFailed
 
 from tokens_auth.services import TokenService
-from rest_framework.exceptions import AuthenticationFailed
 
 
 class HasValidAccessToken(permissions.BasePermission):
@@ -18,7 +18,7 @@ class HasValidAccessToken(permissions.BasePermission):
             User = get_user_model()
             if payload:
                 try:
-                    request.user = User.objects.get(pk=payload["user_id"])
+                    request.user = User.objects.get(pk=payload.get("user_id"))
                     return True
                 except User.DoesNotExist:
                     raise AuthenticationFailed("Invalid token user.")

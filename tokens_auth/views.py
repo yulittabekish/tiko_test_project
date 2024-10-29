@@ -4,7 +4,8 @@ from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
 
-from tokens_auth.serializers import LoginSerializer, RefreshTokenSerializer, RegisterSerializer
+from tokens_auth.serializers import (LoginSerializer, RefreshTokenSerializer,
+                                     RegisterSerializer)
 from tokens_auth.services import TokenService
 
 service = TokenService()

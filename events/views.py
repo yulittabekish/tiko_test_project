@@ -1,15 +1,14 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
 
 from events.filters import EventFilter
 from events.models import Event
 from events.permissions import IsEventOwner
-from events.serializers import EventSerializer, EventRegistrationSerializer, ReadEventSerializer
-from rest_framework import status
-from rest_framework.response import Response
-
+from events.serializers import (EventRegistrationSerializer, EventSerializer,
+                                ReadEventSerializer)
 from events.utils import handle_event_registration
 from tokens_auth.permissions import HasValidAccessToken
 
@@ -27,7 +26,7 @@ class EventViewSet(viewsets.ModelViewSet):
     filterset_class = EventFilter
 
     def get_serializer_class(self):
-        if self.request.method == 'GET':
+        if self.request.method == "GET":
             return ReadEventSerializer
         return EventSerializer
 

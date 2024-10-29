@@ -1,11 +1,9 @@
+import datetime
 from enum import Enum
-
-import jwt
-from django.conf import settings
 from typing import Optional
 
 import jwt
-import datetime
+from django.conf import settings
 
 
 class TokenType(Enum):

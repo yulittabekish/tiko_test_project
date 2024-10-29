@@ -1,6 +1,8 @@
-from tokens_auth.services import TokenService, TokenType
 import datetime
+
 from django.conf import settings
+
+from tokens_auth.services import TokenService, TokenType
 
 
 def get_auth_headers(user):

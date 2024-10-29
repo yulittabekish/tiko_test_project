@@ -1,7 +1,8 @@
 import pytest
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework import status
-from django.contrib.auth import get_user_model
+
 from tests.integration.utils.auth_utils import get_auth_headers
 
 User = get_user_model()
@@ -25,27 +26,36 @@ def test_list_owned_events(api_client, user, event, user2):
     assert len(response.data) == 1
     assert response.data[0]["name"] == event.name
 
+
 @pytest.mark.django_db
-def test_list_owned_events_filter_by_start_date(api_client, user, event, user2, event_2, fixed_datetime):
+def test_list_owned_events_filter_by_start_date(
+    api_client, user, event, user2, event_2, fixed_datetime
+):
     response = api_client.get(
-        reverse("event-list") + f"?start_date=2024-01-03", headers=get_auth_headers(user)
+        reverse("event-list") + f"?start_date=2024-01-03",
+        headers=get_auth_headers(user),
     )
     assert response.status_code == status.HTTP_200_OK
     assert len(response.data) == 1
     assert response.data[0]["name"] == event_2.name
     response = api_client.get(
-        reverse("event-list") + f"?start_date=2023-01-03", headers=get_auth_headers(user)
+        reverse("event-list") + f"?start_date=2023-01-03",
+        headers=get_auth_headers(user),
     )
     assert response.status_code == status.HTTP_200_OK
     assert len(response.data) == 0
 
+
 @pytest.mark.django_db
-def test_list_owned_events_filter_by_status(api_client, user, event, user2, event_2, fixed_datetime):
+def test_list_owned_events_filter_by_status(
+    api_client, user, event, user2, event_2, fixed_datetime
+):
     response = api_client.get(
         reverse("event-list") + f"?status=future", headers=get_auth_headers(user)
     )
     assert response.status_code == status.HTTP_200_OK
     assert len(response.data) == 1
+
 
 @pytest.mark.django_db
 def test_create_event(api_client, user):

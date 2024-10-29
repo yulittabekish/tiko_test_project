@@ -1,11 +1,14 @@
 from django.db import models
-from django_filters import rest_framework
 from django.utils import timezone
+from django_filters import rest_framework
+
 from events.models import Event
+
 
 class EventStatus(models.TextChoices):
     PAST = "past", "Past Events"
     FUTURE = "future", "Future Events"
+
 
 class EventFilter(rest_framework.FilterSet):
     owner = rest_framework.NumberFilter(field_name="owner__id", lookup_expr="exact")
