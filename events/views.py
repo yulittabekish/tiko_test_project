@@ -1,4 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
@@ -30,6 +31,9 @@ class EventViewSet(viewsets.ModelViewSet):
             return ReadEventSerializer
         return EventSerializer
 
+    @extend_schema(
+        request=EventRegistrationSerializer
+    )
     @action(
         detail=True,
         methods=["post"],
