@@ -28,7 +28,7 @@ Go to either **/api/register** endpoint or if you already have a user to **/api/
   - username, password - login
 - Receive access and refresh JWT tokens
 
-Access token should be further provided in the HTTP headers in a form - "Bearer <access_token>".
+Access token should be further provided in the HTTP header "Authorization" in a form - "Bearer <access_token>".
 
 ## Running Tests
 
